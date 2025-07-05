@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ccc;
+            font-family: "Roboto condensed", sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px; /* 3D perspective for the entire page */
+        }
+
+        /* Sidebar */
+        ul {
+            position: fixed;
+            left: -250px; /* Initially off-screen */
+            top: 50%;
+            transform: translateY(-50%) rotateY(-30deg); /* Rotate for 3D effect */
+            transform-style: preserve-3d;
+            transition: 0.7s ease-in-out;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            flex-direction: column;
+        }
+
+        /* Sidebar Item Style */
+        ul li {
+            list-style: none;
+            margin: 10px 0;
+            transition: 0.5s;
+        }
+
+        ul li a {
+            text-decoration: none;
+            display: block;
+            width: 200px;
+            height: 70px;
+            background: #fff;
+            text-align: left;
+            padding-left: 20px;
+            line-height: 70px;
+            position: relative;
+            box-shadow: -10px 10px 30px rgba(0, 0, 0, 0.3);
+            color: #262626;
+            transform: skew(-25deg) rotate(-30deg);
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+
+        ul li a:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: -20px;
+            height: 100%;
+            width: 20px;
+            background: #b1b1b1;
+            transform: rotate(0deg) skew(-45deg);
+        }
+
+        ul li a:after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: -10px;
+            height: 100%;
+            background: #b1b1b1;
+            transform: rotate(0deg) skew(-45deg);
+        }
+
+        /* Hover state */
+        ul li:hover a {
+            background: #e4405f;
+            transform: translateZ(30px) skew(-25deg) rotate(-30deg);
+            box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* When sidebar is visible, slide in */
+        body.sidebar-visible ul {
+            left: 0; /* Move the sidebar to the visible area */
+            transform: translateY(-50%) rotateY(0deg); /* Rotate back for a 3D effect */
+        }
+
+        /* Sidebar Button (for toggling visibility) */
+        .sidebar-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        .sidebar-toggle:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- Button to toggle sidebar -->
+    <button class="sidebar-toggle">Toggle Sidebar</button>
+
+    <!-- Sidebar (ul) -->
+    <ul>
+        <li><a href="https://www.instagram.com/">@ Instagram</a></li>
+        <li><a href="https://www.facebook.com/">Facebook</a></li>
+        <li><a href="https://www.google.com/">Google</a></li>
+        <li><a href="https://x.com/?lang=en">Twitter</a></li>
+    </ul>
+
+    <script>
+        // Add event listener to toggle the sidebar visibility on button click
+        const toggleButton = document.querySelector('.sidebar-toggle');
+        toggleButton.addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-visible'); // Toggle the sidebar visibility
+        });
+    </script>
+</body>
+</html>
